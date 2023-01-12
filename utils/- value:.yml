@@ -1,0 +1,11 @@
+        - value: 
+            element: 'break'
+            attributes:
+              strength : "Strong"
+          point-link:
+            feature: system-output-tokens
+            tokens: [1]
+        - value:
+            element: 'lang' 
+            attributes:
+              'xml:lang': "en-US" 
