@@ -1,2 +1,3 @@
 from utils.dialog_event import DialogEvent as DialogEvent
 from utils.dialog_event import DialogEventFeature as DialogEventFeature
+from utils.dialog_event import DialogEventFeature as DialogEventToken

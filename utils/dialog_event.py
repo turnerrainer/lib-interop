@@ -16,6 +16,14 @@ ELMNT_TIME_LINK='time-link'
 ELMNT_TOKEN_LINK='token-link'
 ELMNT_CONFIDENCE='confidence'      
 
+# default maps for mime types to token classes.
+def mime_to_feature_class(mime_type):
+    if mime_type is None: return DialogEventFeature
+
+    #add mappings here for any known mime-types.
+    if mime_type=='text/plain': return DialogTextFeature
+    else: return DialogEventFeature  
+
 class DialogEvent():
     ### Constructor ###
 
@@ -70,17 +78,21 @@ class DialogEvent():
         self._packet[ELMNT_FEATURES]=s
 
     ### Add/Get Features ###
-    def add_feature(self,feature_name,**kwargs):
+    def add_feature(self,feature_name,feature):
         if self.features is None:
             self.features={}
-        f=DialogEventFeature(**kwargs)
-        self.features[feature_name]=f.packet
-        return f
+        
+        self.features[feature_name]=feature.packet
+        return feature
 
-    def get_feature(self,feature):
-        try:
-            return DialogEventFeature(self.features[feature])
-        except:
+    def get_feature(self,feature_name):
+        f=self.features.get(feature_name,None)
+        
+        if feature is not None: 
+            feature=mime_to_feature_class(kwargs['mime_type'])()
+            feature.packet=f.packet
+            return feature
+        else:
             return None
 
     ### Built-Ins ###
@@ -212,11 +224,12 @@ class DialogEventFeature():
     '''Construct a dialog event feature'''
     def __init__(self,mime_type=None,lang=None,encoding=None):
         self._packet={}
+        self._token_class=DialogEventToken
+        
         if mime_type is not None: 
             self._packet[ELMNT_MIME_TYPE]=mime_type
         if lang is not None:
             self._packet[ELMNT_LANG]=lang
-
         if encoding is not None:
                 self._packet[ELMNT_ENCODING]=encoding
         
@@ -227,9 +240,9 @@ class DialogEventFeature():
         token_group=self._packet[ELMNT_TOKENS].append([])
         return token_group
 
-    def add_token(self, **kwargs,token_class=DialogEventToken):
+    def add_token(self, **kwargs):
         token_group=self._packet[ELMNT_TOKENS][-1]
-        token=token_class(**kwargs)
+        token=self._token_class(**kwargs)
         token_group.append(token.packet)
         return token
 
@@ -243,10 +256,30 @@ class DialogEventFeature():
     def packet(self,p):
         self._packet=p
 
+    # property: mime_type
+    @property
+    def mime_type(self):
+        return self._packet.get(ELMNT_MIME_TYPE,None)
+
+    # property: lang
+    @property
+    def lang(self):
+        return self._packet.get(ELMNT_LANG,None)
+
+    # property: encoding
+    @property
+    def encoding(self):
+        return self._packet.get(ELMNT_ENCODING,None)
+
+#Note need to debug default argument overrides.
+class DialogTextFeature(DialogEventFeature):
+    def __init__(self,**kwargs):
+        super().__init__(mime_type='text/plain',**kwargs)
+        self._token_class=DialogEventToken
+
 class DialogEventToken():
     ### Constructor ###
-
-    '''Construct a dialog event feature'''
+    '''Construct a dialog event token.'''
     def __init__(self,value=None,time_link=None,token_link=None,token_ref=None,confidence=None):
         self._packet={}
         if value is not None: 
