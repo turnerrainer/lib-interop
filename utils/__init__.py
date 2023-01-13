@@ -1,3 +1,4 @@
 from utils.dialog_event import DialogEvent as DialogEvent
-from utils.dialog_event import DialogEventFeature as DialogEventFeature
-from utils.dialog_event import DialogEventFeature as DialogEventToken
+from utils.dialog_event import Feature as Feature
+from utils.dialog_event import TextFeature as TextFeature
+from utils.dialog_event import Token as Token

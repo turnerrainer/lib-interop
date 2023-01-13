@@ -16,13 +16,7 @@ ELMNT_TIME_LINK='time-link'
 ELMNT_TOKEN_LINK='token-link'
 ELMNT_CONFIDENCE='confidence'      
 
-# default maps for mime types to token classes.
-def mime_to_feature_class(mime_type):
-    if mime_type is None: return DialogEventFeature
 
-    #add mappings here for any known mime-types.
-    if mime_type=='text/plain': return DialogTextFeature
-    else: return DialogEventFeature  
 
 class DialogEvent():
     ### Constructor ###
@@ -77,6 +71,24 @@ class DialogEvent():
     def features(self,s):
         self._packet[ELMNT_FEATURES]=s
 
+    @classmethod
+    # return the feature class for the mime-type
+    def feature_class(cls,mime_type):
+        if mime_type is None: return Feature
+
+        #add mappings here for any known mime-types.
+        if mime_type=='text/plain': return TextFeature
+        else: return Feature  
+    
+    @classmethod
+    # return the feature class for the mime-type
+    def value_class(cls,mime_type):
+        if mime_type is None: return str
+
+        #add mappings here for any known mime-types.
+        if mime_type=='text/plain': return str
+        else: return str  
+
     ### Add/Get Features ###
     def add_feature(self,feature_name,feature):
         if self.features is None:
@@ -86,11 +98,11 @@ class DialogEvent():
         return feature
 
     def get_feature(self,feature_name):
-        f=self.features.get(feature_name,None)
+        fpacket=self.features.get(feature_name,None)
         
-        if feature is not None: 
-            feature=mime_to_feature_class(kwargs['mime_type'])()
-            feature.packet=f.packet
+        if fpacket is not None: 
+            feature=self.feature_class(fpacket.get(ELMNT_MIME_TYPE,None))()
+            feature.packet=fpacket
             return feature
         else:
             return None
@@ -123,9 +135,109 @@ class DialogEvent():
         if file: file.write(s)
         return s
 
-    ### Create and Interrogate features
+class Feature():
+    ### Constructor ###
 
+    '''Construct a dialog event feature'''
+    def __init__(self,mime_type=None,lang=None,encoding=None):
+        self._packet={}
+        self._token_class=Token
+        
+        if mime_type is not None: 
+            self._packet[ELMNT_MIME_TYPE]=mime_type
+        if lang is not None:
+            self._packet[ELMNT_LANG]=lang
+        if encoding is not None:
+                self._packet[ELMNT_ENCODING]=encoding
+        
+        #Create the empty array of arrays for the tokens.
+        self._packet[ELMNT_TOKENS]=[]
 
+    def add_token_group(self):
+        token_group=self._packet[ELMNT_TOKENS].append([])
+        return token_group
+
+    def add_token(self, **kwargs):
+        token_group=self._packet[ELMNT_TOKENS][-1]
+        token=self._token_class(**kwargs)
+        token_group.append(token.packet)
+        return token
+
+    def get_token(self,token_ix=0,token_group=0):
+        try:
+            token=Token()
+            token.packet=self._packet[ELMNT_TOKENS][token_group][token_ix]
+        except:
+            token=None
+        return token
+
+    ### Getters and Setters ###
+    # property: packet
+    @property
+    def packet(self):
+        return self._packet
+
+    @packet.setter
+    def packet(self,p):
+        self._packet=p
+
+    # property: mime_type
+    @property
+    def mime_type(self):
+        return self._packet.get(ELMNT_MIME_TYPE,None)
+
+    # property: lang
+    @property
+    def lang(self):
+        return self._packet.get(ELMNT_LANG,None)
+
+    # property: encoding
+    @property
+    def encoding(self):
+        return self._packet.get(ELMNT_ENCODING,None)
+
+#Note need to debug default argument overrides.
+class TextFeature(Feature):
+    def __init__(self,**kwargs):
+        super().__init__(mime_type='text/plain',**kwargs)
+        self._token_class=Token
+
+class Token():
+    ### Constructor ###
+    '''Construct a dialog event token.'''
+    def __init__(self,value=None,time_link=None,token_link=None,token_ref=None,confidence=None):
+        self._packet={}
+        self._value_class=str
+
+        if value is not None: 
+            self.value=value
+        if time_link is not None:
+            self._packet[ELMNT_TIME_LINK]=time_link
+        if token_link is not None:
+            self._packet[ELMNT_TOKEN_LINK]=token_link
+        if confidence is not None:
+            self._packet[ELMNT_CONFIDENCE]=confidence            
+        
+    ### Getters and Setters ###
+    # property: packet
+    @property
+    def packet(self):
+        return self._packet
+
+    @packet.setter
+    def packet(self,p):
+        self._packet=p 
+
+    @property
+    def value(self):
+        return self._packet.get(ELMNT_VALUE,None)
+
+    @value.setter
+    def value(self,value):
+        self._packet[ELMNT_VALUE]=value   
+
+#This is an experimental derivation of the DialogEvent adding stand-off XML interpretation.  
+class DialogEventWithXML(DialogEvent):
     ### Stand-off synthesis ###
     '''Converts a feature of type text/x.ovn.xmlmarkup-1.0 into an XML string.'''
     def to_xml(self,xml_feature):
@@ -172,11 +284,11 @@ class DialogEvent():
                     end_ix=int(_token_link_tokens[-1]) if _token_link_tokens else len(_linked_feature_tokens)-1
                     
                     #insert the new element just before the start token word.
-                    print_iter_index(root)
+                    self.print_iter_index(root)
                     start_child = root.find(f'.//*[@ix="{start_ix}"]')
-                    start_root_index=get_iter_index(start_child,root)
+                    start_root_index=self.get_iter_index(start_child,root)
                     end_child= root.find(f'.//*[@ix="{end_ix}"]')
-                    end_root_index=get_iter_index(end_child,root)
+                    end_root_index=self.get_iter_index(end_child,root)
                     print(f'start_ix:{start_ix} start_root_index: {start_root_index} end_ix: {end_ix} end_root_index: {end_root_index}')
                     root.insert(start_root_index,markup_element)
                     children=[root[i] for i in range(start_root_index+1,end_root_index+1)]
@@ -186,117 +298,37 @@ class DialogEvent():
                         markup_element.append(c)
 
         #return the xml
-        return ET.ElementTree(indent(indent(root)))
+        return ET.ElementTree(self.indent(self.indent(root)))
 
-def print_iter_index(host_element):
-    for p in host_element.getiterator():
-        print(f'p: {p}')
+    @staticmethod
+    def print_iter_index(host_element):
+        for p in host_element.getiterator():
+            print(f'p: {p}')
 
-'''Returns the integer location of the find_element inside the host_element'''
-def get_iter_index(find_element,host_element):
-    parent_map = {c: p for p in host_element.getiterator() for c in p}    
-    
-    for f,v in parent_map:
-        print (f'f: {f} v: {v}')
-    
-    return list(parent_map[find_element]).index(find_element)
-
-def indent(elem, level=0):
-    i = "\n" + level*"  "
-    j = "\n" + (level-1)*"  "
-    if len(elem):
-        if not elem.text or not elem.text.strip():
-            elem.text = i + "  "
-        if not elem.tail or not elem.tail.strip():
-            elem.tail = i
-        for subelem in elem:
-            indent(subelem, level+1)
-        if not elem.tail or not elem.tail.strip():
-            elem.tail = j
-    else:
-        if level and (not elem.tail or not elem.tail.strip()):
-            elem.tail = j
-    return elem
-
-class DialogEventFeature():
-    ### Constructor ###
-
-    '''Construct a dialog event feature'''
-    def __init__(self,mime_type=None,lang=None,encoding=None):
-        self._packet={}
-        self._token_class=DialogEventToken
+    '''Returns the integer location of the find_element inside the host_element'''
+    @staticmethod
+    def get_iter_index(find_element,host_element):
+        parent_map = {c: p for p in host_element.getiterator() for c in p}    
         
-        if mime_type is not None: 
-            self._packet[ELMNT_MIME_TYPE]=mime_type
-        if lang is not None:
-            self._packet[ELMNT_LANG]=lang
-        if encoding is not None:
-                self._packet[ELMNT_ENCODING]=encoding
+        for f,v in parent_map:
+            print (f'f: {f} v: {v}')
         
-        #Create the empty array of arrays for the tokens.
-        self._packet[ELMNT_TOKENS]=[]
+        return list(parent_map[find_element]).index(find_element)
 
-    def add_token_group(self):
-        token_group=self._packet[ELMNT_TOKENS].append([])
-        return token_group
-
-    def add_token(self, **kwargs):
-        token_group=self._packet[ELMNT_TOKENS][-1]
-        token=self._token_class(**kwargs)
-        token_group.append(token.packet)
-        return token
-
-    ### Getters and Setters ###
-    # property: packet
-    @property
-    def packet(self):
-        return self._packet
-
-    @packet.setter
-    def packet(self,p):
-        self._packet=p
-
-    # property: mime_type
-    @property
-    def mime_type(self):
-        return self._packet.get(ELMNT_MIME_TYPE,None)
-
-    # property: lang
-    @property
-    def lang(self):
-        return self._packet.get(ELMNT_LANG,None)
-
-    # property: encoding
-    @property
-    def encoding(self):
-        return self._packet.get(ELMNT_ENCODING,None)
-
-#Note need to debug default argument overrides.
-class DialogTextFeature(DialogEventFeature):
-    def __init__(self,**kwargs):
-        super().__init__(mime_type='text/plain',**kwargs)
-        self._token_class=DialogEventToken
-
-class DialogEventToken():
-    ### Constructor ###
-    '''Construct a dialog event token.'''
-    def __init__(self,value=None,time_link=None,token_link=None,token_ref=None,confidence=None):
-        self._packet={}
-        if value is not None: 
-            self._packet[ELMNT_VALUE]=value
-        if time_link is not None:
-            self._packet[ELMNT_TIME_LINK]=time_link
-        if token_link is not None:
-            self._packet[ELMNT_TOKEN_LINK]=token_link
-        if confidence is not None:
-            self._packet[ELMNT_CONFIDENCE]=confidence            
-        
-    ### Getters and Setters ###
-    # property: packet
-    @property
-    def packet(self):
-        return self._packet
-
-    @packet.setter
-    def packet(self,p):
-        self._packet=p 
+    @staticmethod
+    def indent(elem, level=0):
+        i = "\n" + level*"  "
+        j = "\n" + (level-1)*"  "
+        if len(elem):
+            if not elem.text or not elem.text.strip():
+                elem.text = i + "  "
+            if not elem.tail or not elem.tail.strip():
+                elem.tail = i
+            for subelem in elem:
+                self.indent(subelem, level+1)
+            if not elem.tail or not elem.tail.strip():
+                elem.tail = j
+        else:
+            if level and (not elem.tail or not elem.tail.strip()):
+                elem.tail = j
+        return elem
