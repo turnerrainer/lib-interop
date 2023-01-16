@@ -16,14 +16,16 @@ ELMNT_TIME_LINK='time-link'
 ELMNT_TOKEN_LINK='token-link'
 ELMNT_CONFIDENCE='confidence'      
 
+class DialogPacket():
+    '''class variables'''
+    _feature_class_map={}
+    _value_class_map={}
 
-
-class DialogEvent():
-    ### Constructor ###
-
-    '''Construct an empty dialog event'''
-    def __init__(self):
+    '''Construct a packet'''
+    def __init__(self,p={}):
+        #print(f'p: {p}')
         self._packet={}
+        #print(f'A1: {self.packet}')
 
     ### Getters and Setters ###
     # property: packet
@@ -34,6 +36,65 @@ class DialogEvent():
     @packet.setter
     def packet(self,p):
         self._packet=p
+
+    @classmethod
+    # return the feature class for the mime-type
+    def add_feature_class(cls,mime_type,feature_class):
+        cls._feature_class_map['mime_type']=feature_class
+
+    @classmethod
+    def add_default_feature_classes(cls):
+        cls.add_feature_class('text/plain',TextFeature)
+
+    @classmethod
+    # return the feature class for the mime-type
+    def feature_class(cls,mime_type):
+        try:
+            return cls._feature_class_map['mime_type']
+        except:
+            return Feature    
+
+    @classmethod
+    # return the feature class for the mime-type
+    def value_class(cls,mime_type):
+        try:
+            return cls._value_class_map['mime_type']
+        except:
+            return str  
+
+    ### Built-Ins ###
+    def __str__(self):
+        return str(self._packet)
+
+    def __repr__(self):
+        return repr(self._packet)
+
+    ### Convert to/from JSON and YML ###
+    '''Load the packet from a string or file handle. Also takes optional arguments for yaml.safe_load().'''
+    def load_yml(self,s,**kwargs):
+        self._packet=yaml.safe_load(s,**kwargs) 
+
+    '''Convert the packet to YML and optionally save it to a file. Returns a string containing the YML. Also takes optional arguments for yaml.safe_dump().'''
+    def dump_yml(self,file=None,**kwargs):
+        if file:
+            return yaml.safe_dump(self._packet,file,**kwargs)
+        else:
+            return yaml.safe_dump(self._packet,**kwargs)
+    
+    '''Convert the packet to JSON and optionally save it to a file. Also takes optional arguments for json.dumps().'''
+    def dump_json(self,file=None,**kwargs):
+        kwargs.setdefault('default', str)
+        kwargs.setdefault('indent', 4)
+        
+        s=json.dumps(self._packet,**kwargs)
+        if file: file.write(s)
+        return s
+
+class DialogEvent(DialogPacket):
+    ### Constructor ###
+    '''Construct an empty dialog event'''
+    def __init__(self):
+       super().__init__()
 
     # property: speeaker_id
     @property
@@ -71,24 +132,6 @@ class DialogEvent():
     def features(self,s):
         self._packet[ELMNT_FEATURES]=s
 
-    @classmethod
-    # return the feature class for the mime-type
-    def feature_class(cls,mime_type):
-        if mime_type is None: return Feature
-
-        #add mappings here for any known mime-types.
-        if mime_type=='text/plain': return TextFeature
-        else: return Feature  
-    
-    @classmethod
-    # return the feature class for the mime-type
-    def value_class(cls,mime_type):
-        if mime_type is None: return str
-
-        #add mappings here for any known mime-types.
-        if mime_type=='text/plain': return str
-        else: return str  
-
     ### Add/Get Features ###
     def add_feature(self,feature_name,feature):
         if self.features is None:
@@ -107,40 +150,14 @@ class DialogEvent():
         else:
             return None
 
-    ### Built-Ins ###
-    def __str__(self):
-        return str(self._packet)
-
-    def __repr__(self):
-        return repr(self._packet)
-
-    ### Convert to/from JSON and YML ###
-    '''Load the dialog event from a string or file handle. Also takes optional arguments for yaml.safe_load().'''
-    def load_yml(self,s,**kwargs):
-        self._packet=yaml.safe_load(s,**kwargs) 
-
-    '''Convert the dialog event to YML and optionally save it to a file. Returns a string containing the YML. Also takes optional arguments for yaml.safe_dump().'''
-    def dump_yml(self,file=None,**kwargs):
-        if file:
-            return yaml.safe_dump(self._packet,file,**kwargs)
-        else:
-            return yaml.safe_dump(self._packet,**kwargs)
-    
-    '''Convert the dialog event to JSON and optionally save it to a file. Also takes optional arguments for json.dumps().'''
-    def dump_json(self,file=None,**kwargs):
-        kwargs.setdefault('default', str)
-        kwargs.setdefault('indent', 4)
-        
-        s=json.dumps(self._packet,**kwargs)
-        if file: file.write(s)
-        return s
-
-class Feature():
+class Feature(DialogPacket):
     ### Constructor ###
 
     '''Construct a dialog event feature'''
-    def __init__(self,mime_type=None,lang=None,encoding=None):
-        self._packet={}
+    def __init__(self,mime_type=None,lang=None,encoding=None,p={},**kwargs):
+        #print(f'Feature() kwargs: {kwargs}')
+        super().__init__(**kwargs)        
+        #print(f'A2: {self.packet}')
         self._token_class=Token
         
         if mime_type is not None: 
@@ -152,6 +169,7 @@ class Feature():
         
         #Create the empty array of arrays for the tokens.
         self._packet[ELMNT_TOKENS]=[]
+
 
     def add_token_group(self):
         token_group=self._packet[ELMNT_TOKENS].append([])
@@ -199,15 +217,16 @@ class Feature():
 #Note need to debug default argument overrides.
 class TextFeature(Feature):
     def __init__(self,**kwargs):
+        #print(f'Text Feature() kwargs: {kwargs}')
         super().__init__(mime_type='text/plain',**kwargs)
+        #print(f'A3: {self.packet}')
         self._token_class=Token
 
-class Token():
+class Token(DialogPacket):
     ### Constructor ###
     '''Construct a dialog event token.'''
     def __init__(self,value=None,time_link=None,token_link=None,token_ref=None,confidence=None):
-        self._packet={}
-        self._value_class=str
+        super().__init__()
 
         if value is not None: 
             self.value=value
@@ -219,15 +238,6 @@ class Token():
             self._packet[ELMNT_CONFIDENCE]=confidence            
         
     ### Getters and Setters ###
-    # property: packet
-    @property
-    def packet(self):
-        return self._packet
-
-    @packet.setter
-    def packet(self,p):
-        self._packet=p 
-
     @property
     def value(self):
         return self._packet.get(ELMNT_VALUE,None)
@@ -235,6 +245,14 @@ class Token():
     @value.setter
     def value(self,value):
         self._packet[ELMNT_VALUE]=value   
+
+    @property    
+    def confidence(self):
+        return self._packet.get(ELMNT_CONFIDENCE,None)
+
+    @confidence.setter
+    def confidence(self,confidence):
+        self._packet[ELMNT_CONFIDENCE]=confidence  
 
 #This is an experimental derivation of the DialogEvent adding stand-off XML interpretation.  
 class DialogEventWithXML(DialogEvent):
@@ -253,7 +271,7 @@ class DialogEventWithXML(DialogEvent):
         _linked_feature=_features.get(_root_token_link_feature,None)
         _linked_feature_tokens=_linked_feature['tokens'][0]
 
-        print(str(_linked_feature_tokens))
+        #print(str(_linked_feature_tokens))
 
         #build the root with the words
         root=ET.Element(_root_token_element)
@@ -332,3 +350,6 @@ class DialogEventWithXML(DialogEvent):
             if level and (not elem.tail or not elem.tail.strip()):
                 elem.tail = j
         return elem
+
+#Define default feature classes
+#DialogPacket.add_default_feature_classes()
