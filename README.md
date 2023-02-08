@@ -21,4 +21,4 @@ The requirements for this activity are listed below.
 - David Attwater
 - Deborah Dahl
 - Jim Larson
-- Emmet Coin
+- Emmett Coin
