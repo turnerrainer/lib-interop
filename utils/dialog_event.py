@@ -14,7 +14,8 @@ ELMNT_TOKENS='tokens'
 ELMNT_VALUE='value'
 ELMNT_TIME_LINK='time-link'
 ELMNT_TOKEN_LINK='token-link'
-ELMNT_CONFIDENCE='confidence'      
+ELMNT_CONFIDENCE='confidence'
+ELMNT_HISTORY='history'  
 
 class DialogPacket():
     '''class variables'''
@@ -253,6 +254,28 @@ class Token(DialogPacket):
     @confidence.setter
     def confidence(self,confidence):
         self._packet[ELMNT_CONFIDENCE]=confidence  
+
+
+class History(DialogPacket):
+    ### Constructor ###
+    '''Construct a dialog history object token.'''
+    def __init__(self):
+        super().__init__()
+        
+        #Create the empty array of dialog events
+        self._packet[ELMNT_HISTORY]=[]
+
+    def add_event(self, dialog_event):
+        self._packet[ELMNT_HISTORY].append(dialog_event)
+        return dialog_event
+
+    def get_event(self,ix=0):
+        try:
+            event=DialogEvent()
+            event.packet=self._packet[ELMNT_TOKENS][ix]
+        except:
+            event=None
+        return event
 
 #This is an experimental derivation of the DialogEvent adding stand-off XML interpretation.  
 class DialogEventWithXML(DialogEvent):
