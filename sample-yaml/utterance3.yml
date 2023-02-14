@@ -34,32 +34,32 @@ features:
     ssml-markup:
       mime-type: text/x.ovn.xmlmarkup-1.0
       tokens:
-        - value:
-            element: speak 
-          token-link:
-            feature: system-output-tokens 
-        - value: 
-            element: voice 
-            attributes: 
-              - name : "en-US-JennyNeural"
-          char-link:
-            feature: system-output-tokens
-            tokens: [0,1,2,3,4,5,6]    
-        - value: 
-            element: phoneme     
-            attributes:
-              alphabet: "sapi" 
-              ph : "t aa m"
-          token-link:
-            feature: system-output-tokens
-            tokens: [6]   
+        -
+          - value:
+              element: speak 
+            token-link:
+              feature: system-output-tokens 
+          - value: 
+              element: voice 
+              attributes: 
+                - name : "en-US-JennyNeural"
+            char-link:
+              feature: system-output-tokens
+              tokens: [0,1,2,3,4,5,6]    
+          - value: 
+              element: phoneme     
+              attributes:
+                alphabet: "sapi" 
+                ph : "t aa m"
+            token-link:
+              feature: system-output-tokens
+              tokens: [6]   
 
     system-output-ssml:
       mime-type: xml/ssml
       tokens:  
-        - 
-          - <speak> <phoneme alphabet="ipa" ph=="t aa m"> tom </phoneme> </speak>
-
+        -
+          - value: '<speak> <phoneme alphabet="ipa" ph=="t aa m"> tom </phoneme> </speak>'
 
 
       

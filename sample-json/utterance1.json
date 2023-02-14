@@ -72,112 +72,128 @@
             "lang": "en",
             "encoding": "UTF-8",
             "tokens": [
-                "yes the cat sat on the mat"
+                [
+                    {
+                        "value": "yes the cat sat on the mat"
+                    }
+                ]
             ]
         },
         "user-request-text-tokens": {
             "mime-type": "text/x.ovn-plain-1.0",
             "tokens": [
-                {
-                    "value": "yes",
-                    "token-link": {
-                        "feature": "user-request-pronunciation",
-                        "tokens": [
-                            0,
-                            1,
-                            2
-                        ]
+                [
+                    {
+                        "value": "yes",
+                        "token-link": {
+                            "feature": "user-request-pronunciation",
+                            "tokens": [
+                                0,
+                                1,
+                                2
+                            ]
+                        },
+                        "confidence": 0.78
                     },
-                    "confidence": 0.78
-                },
-                {
-                    "value": "the",
-                    "token-link": {
-                        "feature": "user-request-pronunciation",
-                        "tokens": [
-                            1,
-                            2
-                        ]
+                    {
+                        "value": "the",
+                        "token-link": {
+                            "feature": "user-request-pronunciation",
+                            "tokens": [
+                                1,
+                                2
+                            ]
+                        },
+                        "confidence": 0.77
                     },
-                    "confidence": 0.77
-                },
-                {
-                    "value": "cat",
-                    "token-link": {
-                        "feature": "user-request-pronunciation",
-                        "tokens": [
-                            3,
-                            4,
-                            5
-                        ]
+                    {
+                        "value": "cat",
+                        "token-link": {
+                            "feature": "user-request-pronunciation",
+                            "tokens": [
+                                3,
+                                4,
+                                5
+                            ]
+                        },
+                        "confidence": 0.96
                     },
-                    "confidence": 0.96
-                },
-                {
-                    "value": "sat",
-                    "confidence": 1.0
-                },
-                {
-                    "value": "on",
-                    "confidence": 0.86
-                },
-                {
-                    "value": "the",
-                    "confidence": 0.94
-                },
-                {
-                    "value": "mat",
-                    "confidence": 0.96
-                }
+                    {
+                        "value": "sat",
+                        "confidence": 1.0
+                    },
+                    {
+                        "value": "on",
+                        "confidence": 0.86
+                    },
+                    {
+                        "value": "the",
+                        "confidence": 0.94
+                    },
+                    {
+                        "value": "mat",
+                        "confidence": 0.96
+                    }
+                ]
             ]
         },
         "user-request-meaning": {
             "mime-type": "text/x.ovn-frame-semantic-1.0",
             "tokens": [
-                {
-                    "value": {
-                        "label": "sitting-action",
-                        "type": "intent"
+                [
+                    {
+                        "value": {
+                            "label": "sitting-action",
+                            "type": "intent"
+                        },
+                        "token-link": {
+                            "feature": "user-request-text"
+                        }
                     },
-                    "token-link": {
-                        "feature": "user-request-text"
+                    {
+                        "value": {
+                            "label": "animal",
+                            "type": "slot"
+                        },
+                        "token-link": {
+                            "feature": "user-request-text",
+                            "tokens": [
+                                1
+                            ]
+                        }
                     }
-                },
-                {
-                    "value": {
-                        "label": "animal",
-                        "type": "slot"
-                    },
-                    "token-link": {
-                        "feature": "user-request-text",
-                        "tokens": [
-                            1
-                        ]
-                    }
-                }
+                ]
             ]
         },
         "user-dialog-act": {
             "mime-type": "text/x.dialog_act-1.0",
             "tokens": [
-                {
-                    "value": "affirm-yes",
-                    "token-link": {
-                        "feature": "user-request-text",
-                        "tokens": [
-                            0
-                        ]
+                [
+                    {
+                        "value": "affirm-yes",
+                        "token-link": {
+                            "feature": "user-request-text",
+                            "tokens": [
+                                0
+                            ]
+                        }
+                    },
+                    {
+                        "value": "assert",
+                        "token-link": {
+                            "feature": "user-request-text",
+                            "tokens": [
+                                0,
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6
+                            ]
+                        }
                     }
-                },
-                {
-                    "value": "assert",
-                    "token-link": {
-                        "feature": "user-request-text",
-                        "tokens": [
-                            "0 1 2 3 4 5 6"
-                        ]
-                    }
-                }
+                ]
             ]
         }
     }
