@@ -1,0 +1,9 @@
+features:
+  user-request-text:
+    encoding: utf-8
+    lang: en
+    mime-type: text/plain
+    value: what is the weather forecast for tomorrow?
+id: user-utterance-45
+previous-id: user-utterance-44
+speaker-id: user1234

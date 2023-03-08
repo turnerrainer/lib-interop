@@ -1,0 +1,38 @@
+features:
+  audio:
+    mime-type: audio/wav-url
+    value: http://localhost/xyz1234.wav
+  date:
+    confidence: 0.99
+    link: user-request-text/value[34 to 41]
+    mime-type: text/x.ovn-semantic-1.0
+    value:
+      Label: tomorrow
+      Type: DATE
+  intent:
+    confidence: 1.0
+    link: user-request-text/value
+    mime-type: text/x.ovn-semantic-1.0
+    value:
+      Label: WeatherForecast
+      Type: INTENT
+  user-request-text:
+    alternates:
+    - - confidence: 0.89
+        encoding: UTF-8
+        lang: en
+        link: audio/value
+        mime-type: text/plain
+        value: what is the weather forecast for thursday
+    confidence: 0.99
+    encoding: UTF-8
+    lang: en
+    link: audio/value
+    mime-type: text/plain
+    value: what is the weather forecast for tomorrow
+id: user-utterance-30
+previous-id: user-utterance-28
+span:
+  end_time: '2022-12-20 15:59:01.246500+00:00'
+  start_time: '2022-12-20 15:59:01.246500+00:00'
+speaker-id: b5y09lky5KU5

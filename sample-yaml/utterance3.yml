@@ -1,0 +1,59 @@
+features:
+  ssml-markup:
+    mime-type: text/x.ovn.xmlmarkup-1.0
+    tokens:
+    - - token-link:
+          feature: system-output-tokens
+        value:
+          element: speak
+      - char-link:
+          feature: system-output-tokens
+          tokens:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+        value:
+          attributes:
+          - name: en-US-JennyNeural
+          element: voice
+      - token-link:
+          feature: system-output-tokens
+          tokens:
+          - 6
+        value:
+          attributes:
+            alphabet: sapi
+            ph: t aa m
+          element: phoneme
+  system-output-ssml:
+    mime-type: xml/ssml
+    tokens:
+    - - value: <speak> <phoneme alphabet="ipa" ph=="t aa m"> tom </phoneme> </speak>
+  system-output-text:
+    encoding: UTF-8
+    lang: en
+    mime-type: text/plain
+    tokens:
+    - - value: and how are you feeling today Tom?
+  system-output-tokens:
+    encoding: UTF-8
+    lang: en
+    mime-type: text/plain
+    tokens:
+    - - value: and
+      - value: how
+      - value: are
+      - value: you
+      - value: feeling
+      - value: today
+      - value: Tom
+id: user-utterance-30
+previous-id: user-utterance-28
+span:
+  end_time: '2022-12-20 15:59:01.246500+00:00'
+  start_time: '2022-12-20 15:59:01.246500+00:00'
+speaker-id: b5y09lky5KU5
