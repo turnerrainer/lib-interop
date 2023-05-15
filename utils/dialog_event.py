@@ -1,6 +1,7 @@
 import yaml
 import json
 import xml.etree.ElementTree as ET
+from datetime import datetime
 
 # standard element names
 ELMNT_SPEAKER_ID='speaker-id'
@@ -12,10 +13,14 @@ ELMNT_LANG='lang'
 ELMNT_ENCODING='encoding'
 ELMNT_TOKENS='tokens'
 ELMNT_VALUE='value'
-ELMNT_TIME_LINK='time-link'
-ELMNT_TOKEN_LINK='token-link'
+ELMNT_LINKS='links'
 ELMNT_CONFIDENCE='confidence'
 ELMNT_HISTORY='history'  
+ELMNT_START='start'
+ELMNT_START_OFFSET='start-offset'
+ELMNT_END='end'
+ELMNT_END_OFFSET='end-offset'
+ELMNT_SPAN='span'
 
 class DialogPacket():
     '''class variables'''
@@ -95,6 +100,48 @@ class DialogPacket():
         if file: file.write(s)
         return s
 
+class Span(DialogPacket):
+    ### Constructor ###
+    '''Construct an empty dialog event'''
+    def __init__(self):
+       super().__init__()
+
+    # property: start
+    @property
+    def start(self):
+        return self._packet.get(ELMNT_START,None)
+
+    @start.setter
+    def start(self,s):
+        self._packet[ELMNT_START]=s
+
+    # property: end
+    @property
+    def end(self):
+        return self._packet.get(ELMNT_END,None)
+
+    @end.setter
+    def end(self,s):
+        self._packet[ELMNT_END]=s
+
+    # property: start-offset
+    @property
+    def start_offset(self):
+        return self._packet.get(ELMNT_START_OFFSET,None)
+
+    @start_offset.setter
+    def start_offset(self,s):
+        self._packet[ELMNT_START_OFFSET]=s
+
+    # property: end-offset
+    @property
+    def end_offset(self):
+        return self._packet.get(ELMNT_END_OFFSET,None)
+
+    @end_offset.setter
+    def end_offset(self,s):
+        self._packet[ELMNT_END_OFFSET]=s
+
 class DialogEvent(DialogPacket):
     ### Constructor ###
     '''Construct an empty dialog event'''
@@ -137,6 +184,24 @@ class DialogEvent(DialogPacket):
     def features(self,s):
         self._packet[ELMNT_FEATURES]=s
 
+    # property: span
+    @property
+    def span(self):
+        return self._packet.get(ELMNT_SPAN,None)
+
+    @span.setter
+    def span(self,s):
+        self._packet[ELMNT_SPAN]=s
+        print(f'self._packet[ELMNT_SPAN]: {self._packet[ELMNT_SPAN]}')
+
+    ### Add/Get span
+    def add_span(self,span):
+        if self.span is None:
+            self.span={}    
+        self.span=span.packet
+        print(f'self.span:{self.span}')
+        return span            
+
     ### Add/Get Features ###
     def add_feature(self,feature_name,feature):
         if self.features is None:
@@ -175,35 +240,20 @@ class Feature(DialogPacket):
         #Create the empty array of arrays for the tokens.
         self._packet[ELMNT_TOKENS]=[]
 
-
-    def add_token_group(self):
-        token_group=self._packet[ELMNT_TOKENS].append([])
-        return token_group
-
     def add_token(self, **kwargs):
-        token_group=self._packet[ELMNT_TOKENS][-1]
-        token=self._token_class(**kwargs)
-        token_group.append(token.packet)
-        return token
+        my_token=self._token_class(**kwargs)
+        self.tokens.append(my_token.packet)
+        return my_token
 
-    def get_token(self,token_ix=0,token_group=0):
+    def get_token(self,token_ix=0):
         try:
-            token=Token()
-            token.packet=self._packet[ELMNT_TOKENS][token_group][token_ix]
+            token=self._token_class()
+            token.packet=self.tokens[token_ix]
         except:
             token=None
         return token
 
     ### Getters and Setters ###
-    # property: packet
-    @property
-    def packet(self):
-        return self._packet
-
-    @packet.setter
-    def packet(self,p):
-        self._packet=p
-
     # property: mime_type
     @property
     def mime_type(self):
@@ -219,6 +269,11 @@ class Feature(DialogPacket):
     def encoding(self):
         return self._packet.get(ELMNT_ENCODING,None)
 
+    # property: tokens
+    @property
+    def tokens(self):
+        return self._packet.get(ELMNT_TOKENS,None)
+    
 #Note need to debug default argument overrides.
 class TextFeature(Feature):
     def __init__(self,**kwargs):
@@ -230,15 +285,13 @@ class TextFeature(Feature):
 class Token(DialogPacket):
     ### Constructor ###
     '''Construct a dialog event token.'''
-    def __init__(self,value=None,time_link=None,token_link=None,token_ref=None,confidence=None):
+    def __init__(self,value=None,links=None,confidence=None):
         super().__init__()
 
         if value is not None: 
             self.value=value
-        if time_link is not None:
-            self._packet[ELMNT_TIME_LINK]=time_link
-        if token_link is not None:
-            self._packet[ELMNT_TOKEN_LINK]=token_link
+        if links is not None:
+            self._packet[ELMNT_LINKS]=links
         if confidence is not None:
             self._packet[ELMNT_CONFIDENCE]=confidence            
         

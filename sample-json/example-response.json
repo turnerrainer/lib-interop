@@ -1,0 +1,47 @@
+{
+    "ovn-version": "1.0",
+    "session": {
+        "sessionId": "xxx",
+        "agent-history": [
+            "azeba.amazon.com",
+            "voice-task-finder.com"
+        ],
+        "speakers": [
+            {
+                "speaker-id": "b5y09lky5KU5",
+                "accessToken": "asdfadsf",
+                "wallet-server": "ovon-wallets-repository.com",
+                "history-server": "ovon-=history-repository.com",
+                "role": "user"
+            },
+            {
+                "speaker-id": "mh8k907jjj",
+                "agent-url": "weatherman.com",
+                "accessToken": "sdlfkjalkhjasd",
+                "wallet-server": "ovon-wallets-repository.com",
+                "history-server": "ovon-=history-repository.com",
+                "role": "system"
+            }
+        ]
+    },
+    "event": {
+        "speaker-id": "mh8k907jjj",
+        "id": "user-utterance-31",
+        "previous-id": "user-utterance-29",
+        "span": {
+            "start": "2022-12-20 16:04:07.987343+00:00"
+        },
+        "features": {
+            "text": {
+                "mime-type": "application/ssml+xml",
+                "lang": "en",
+                "encoding": "UTF-8",
+                "tokens": [ 
+                    { 
+                        "value": "<speak version=\"1.1\"><p><voice gender=\"male\"><s>The weather in spain is rainy</s></voice></p></speak>"
+                    }            
+                ]
+            }
+        }    
+    }
+}

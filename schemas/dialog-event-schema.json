@@ -1,0 +1,110 @@
+{
+  "$id": "https://https://openvoicenetwork.org/schema/dialog-event.json",
+  "$schema": "https://https://openvoicenetwork.org/schema",
+  "description": "A representation of a 'language event’ that is to say any information associated with a phrase, utterance or part of an utterance.",
+  "type": "object",
+  "required":  ["id" , "speaker-id", "span", "features" ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "previous-id": {
+      "type": "string"
+    },
+    "speaker-id": {
+      "type": "string"
+    },
+    "span": { "$ref": "#/$defs/span" },
+    "features": {
+      "type": "object",
+      "patternProperties": {
+        ".*": { "$ref": "#/$defs/features" }
+      }
+    }
+  },
+  "$defs": {
+    "features": {
+      "type": "object",
+      "required":  ["mime-type" , "tokens" ],
+      "properties": {
+        "encoding": {
+          "type": "string",
+          "description": "The text encoding of the token values"
+        },
+        "mime-type": {
+          "type": "string",
+          "description": "The mime-type of the token values"
+        },
+        "lang": {
+          "type": "string",
+          "description": "The language of the token values"
+        },
+        "alphabet": {
+          "type": "string",
+          "description": "The specific subset of tokens allowed in this language"
+        },
+        "tokens" : {
+          "type": "array",
+          "items":  { 
+              "$ref": "#/$defs/token" 
+          }
+        }
+      }
+    },
+    "token": {
+      "type": "object",
+      "properties": {
+          "value": {
+            "type": ["number","string","object","array","boolean"]
+          },
+          "value-url": {
+            "$ref": "#/$defs/uri"
+          },          
+          "confidence": {
+            "type": "number"
+          },
+          "span": { "$ref": "#/$defs/span" },
+          "links" : {
+              "type": "array",
+              "items":  { 
+                "$ref": "#/$defs/jpath" 
+              }
+          }
+      }
+    },
+    "uri": {
+      "type": "string",
+      "description": "any valid URI"
+    },
+    "jpath": {
+      "type": "string",
+      "description": "an expression in JPATH syntax"
+    },
+    "span": {
+      "anyOf": [
+        { "required": ["start"] },
+        { "required": ["start-offset"] }
+      ],
+      "properties": {
+        "start": { 
+            "$ref": "#/$defs/iso-time" 
+        },
+        "end": { 
+            "$ref": "#/$defs/iso-time" 
+        },
+        "start-offset": {
+            "$ref": "#/$defs/iso-duration" 
+        },
+        "end-offset": {
+            "$ref": "#/$defs/iso-duration" 
+        }
+      }
+    },
+    "iso-time": {        
+      "description": "A string in ISO 8601 absolute format."
+    },
+    "iso-duration": {        
+      "description": "A string in ISO 8601 duration format. (e.g 'PT0.4654S' for seconds)"
+    }
+  }
+}

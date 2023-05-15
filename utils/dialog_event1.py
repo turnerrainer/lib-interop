@@ -62,7 +62,7 @@ class DialogPacket1():
         if file: file.write(s)
         return s
 
-class DialogEvent(DialogPacket):
+class DialogEvent(DialogPacket1):
     ### Constructor ###
     '''Construct an empty dialog event'''
     def __init__(self,p):
@@ -121,7 +121,7 @@ class DialogEvent(DialogPacket):
         else:
             return None
 
-class Feature(DialogPacket):
+class Feature(DialogPacket1):
     ### Constructor ###
 
     '''Construct a dialog event feature'''
@@ -182,7 +182,7 @@ class Feature(DialogPacket):
     def tokens(self,value):
         self._packet[ELMNT_TOKENS]=value     
 
-class Token(DialogPacket):
+class Token(DialogPacket1):
     ### Constructor ###
     '''Construct a dialog event token.'''
     def __init__(self,s):
@@ -205,7 +205,7 @@ class Token(DialogPacket):
     def confidence(self,confidence):
         self._packet[ELMNT_CONFIDENCE]=confidence  
 
-class TimeLink(DialogPacket):
+class TimeLink(DialogPacket1):
     ### Constructor ###
     def __init__(self,p):
         super().__init__(p)
@@ -228,7 +228,7 @@ class TimeLink(DialogPacket):
     def end(self,value):
         self._packet[ELMNT_END]=value   
 
-class TokenLink(DialogPacket):
+class TokenLink(DialogPacket1):
     ### Constructor ###
     def __init__(self,p):
         super().__init__(p)

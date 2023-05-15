@@ -3,51 +3,59 @@
     "id": "user-utterance-30",
     "previous-id": "user-utterance-28",
     "span": {
-        "start_time": "2022-12-20 15:59:01.246500+00:00",
-        "duration": "1045ms"
+        "start": "2022-12-20 15:59:01.246500+00:00",
+        "end-offset": "PT0.1045"
     },
     "features": {
         "audio": {
-            "mime-type": "audio/wav-url",
-            "value": "http://localhost/xyz1234.wav"
+            "mime-type": "audio/wav",
+            "tokens": [ 
+                { 
+                    "value-url": "http://localhost/xyz1234.wav" 
+                }            
+            ]
         },
         "user-request-text": {
             "mime-type": "text/plain",
             "lang": "en",
             "encoding": "UTF-8",
-            "value": "what is the weather forecast for tomorrow",
-            "link": "audio/value",
-            "confidence": 0.99,
+            "tokens": [ 
+                { 
+                    "value": "what is the weather forecast for tomorrow",
+                    "links": ["audio/tokens[0]/value"],
+                    "confidence": 0.99
+                }            
+            ],
             "alternates": [
                 [
                     {
-                        "mime-type": "text/plain",
-                        "lang": "en",
-                        "encoding": "UTF-8",
                         "value": "what is the weather forecast for thursday",
-                        "link": "audio/value",
+                        "links": ["audio/tokens[0]/value"],
                         "confidence": 0.89
                     }
                 ]
             ]
         },
-        "intent": {
+        "semantic-result": {
             "mime-type": "text/x.ovn-semantic-1.0",
-            "value": {
-                "Type": "INTENT",
-                "Label": "WeatherForecast"
-            },
-            "links": ["user-request-text/value"],
-            "confidence": 1.0
-        },
-        "slot-1": {
-            "mime-type": "text/x.ovn-semantic-1.0",
-            "value": {
-                "Type": "DATE",
-                "Label": "02-14-2023"
-            },
-            "link": "user-request-text/value[34 to 41]",
-            "confidence": 0.99
+            "tokens": [
+                {
+                    "value": {
+                        "Name": "intent",
+                        "Label": "WeatherForecast"
+                    },
+                    "links": ["user-request-text/tokens[0]/value"],
+                    "confidence": 1.0
+                },
+                {
+                    "value": {
+                        "Name": "date",
+                        "Label": "02-14-2023"
+                    },
+                    "links": [ "user-request-text/tokens[0]/value[34 to 41]" ],
+                    "confidence": 0.99
+                }
+            ]
         }
     }    
 }

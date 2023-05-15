@@ -1,26 +1,26 @@
 {
-	"id": "user-utterance-45",
-	"speaker-id": "user1234",
-	"previous-id": "user-utterance-44",
-	"features": {
-		"user-request-text": {
-			"mime-type": "text/plain",
-			"lang": "en",
-			"encoding": "utf-8",
-			"tokens": [
-				[
-					{
-						"value": "what is the weather forecast for tomorrow?",
-						"confidence": 0.99
-					}
-				],
-				[
-					{
-						"value": "what is the weather forecast for tuesday?",
-						"confidence": 0.87
-					}
-				]
-			]
-		}
-	}
+    "id": "user-utterance-45",
+    "speaker-id": "user1234",
+    "previous-id": "user-utterance-44",
+    "span": {
+        "start": "2022-12-20 15:59:01.246500+00:00",
+        "end-offset": "PT0.1045"
+    },
+    "features": {
+        "user-request-text": {
+            "mime-type": "text/plain",
+            "lang": "en",
+            "encoding": "utf-8",
+            "tokens": [
+                {
+                    "value": "what is the weather forecast for tomorrow?",
+                    "confidence": 0.99
+                },
+                {
+                    "value": "what is the weather forecast for tuesday?",
+                    "confidence": 0.87
+                }
+            ]
+        }
+    }
 }

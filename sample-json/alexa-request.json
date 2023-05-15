@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "session": {
+      "new": true,
+      "sessionId": "amzn1.echo-api.session.[unique-value-here]",
+      "application": {
+          "applicationId": "amzn1.ask.skill.[unique-value-here]"
+      },
+      "attributes": {
+          "key": "string value"
+      },
+      "user": {
+          "userId": "amzn1.ask.account.[unique-value-here]",
+          "accessToken": "Atza|AAAAAAAA..."
+      }
+  },
+  "context": {
+      "System": {
+          "device": {
+              "deviceId": "string",
+              "supportedInterfaces": {
+                  "AudioPlayer": {}
+              },
+              "persistentEndpointId": "amzn1.alexa.endpoint.[unique-value-here]"
+          },
+          "application": {
+              "applicationId": "amzn1.ask.skill.[unique-value-here]"
+          },
+          "user": {
+              "userId": "amzn1.ask.account.[unique-value-here]",
+              "accessToken": "Atza|AAAAAAAA..."
+          },
+          "person": {
+              "personId": "amzn1.ask.person.[unique-value-here]",
+              "accessToken": "Atza|BBBBBBB..."
+          },
+          "unit": {
+              "unitId": "amzn1.ask.unit.[unique-value-here]",
+              "persistentUnitId": "amzn1.alexa.unit.did.[unique-value-here]"
+          },
+          "apiEndpoint": "https://api.amazonalexa.com",
+          "apiAccessToken": "AxThk..."
+      },
+      "Advertising": {
+          "advertisingId": "296D263C-87BC-86A3-18A7-D307393B83A9",
+          "limitAdTracking": false
+      },
+      "AudioPlayer": {
+          "playerActivity": "PLAYING",
+          "token": "audioplayer-token",
+          "offsetInMilliseconds": 0
+      }
+  },
+  "request": {}
+}

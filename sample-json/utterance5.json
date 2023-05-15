@@ -4,8 +4,8 @@
     "previous-id": "user-utterance-44",
     
     "span": {
-        "start_time": "2022-12-20 15:59:01.246500+00:00",
-        "duration": "1045ms"
+        "start": "2022-12-20 15:59:01.246500+00:00",
+        "end-offset": "PT2.906"
     },
     
     "features": {
@@ -13,7 +13,11 @@
             "mime-type": "text/plain",
             "lang": "en",
             "encoding": "utf-8",
-            "value": "what is the weather forecast for tomorrow?"
+            "tokens" : [
+                {
+                    "value": "what is the weather forecast for tomorrow?"
+                }
+            ]
         }
     }
 }
