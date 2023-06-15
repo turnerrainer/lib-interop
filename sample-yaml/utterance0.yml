@@ -12,5 +12,5 @@ id: user-utterance-45
 previous-id: user-utterance-44
 span:
   end-offset: PT0.1045
-  start: '2022-12-20 15:59:01.246500+00:00'
+  start-time: '2022-12-20 15:59:01.246500+00:00'
 speaker-id: user1234

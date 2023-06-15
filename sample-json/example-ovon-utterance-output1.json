@@ -1,0 +1,43 @@
+{
+    "NOTE": "This object is currently informative not normative.  A derived specification of the dialog event object will be published to standardize this at a later date.",
+    
+    "id": "2",
+    "speaker-id": "cassandra",
+    "conversation": "emmett_Wed,_14_Jun_2023_02:05:51_GMT",
+    "agent": "cassandra",
+    "mode": "output/voice",
+    "originPointType": "",
+
+    "span": {
+      "start-time": "2023-06-14 02:06:12+00:00"
+    },
+  
+    "features": {
+        "text": {
+            "mime-type": "plain/text",
+            "lang": "en",
+            "encoding": "UTF-8",
+            "tokens": [ { "value": "We have a regular prescription for Citalopram 20 mg on file"  } ]
+        },
+
+        "redacted-text": {
+            "mime-type": "plain/text",
+            "lang": "en",
+            "encoding": "UTF-8",
+            "tokens": [ { "value": "We have a regular prescription for $MEDICATION on file"  } ]
+        },
+
+        "ej-custom-render": {
+            "mime-type": "application/ejcustom+json",
+            "tokens": [ {
+                "value": {
+                    "semantic":"Confirm Prescription [2]",
+                    "emotion": "ejNeutral",
+                    "voice": "candandra",
+                    "gesture": "" 
+                } 
+            }
+            ]
+        }
+    }
+}

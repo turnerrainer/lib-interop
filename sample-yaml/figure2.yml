@@ -1,0 +1,27 @@
+features:
+  my-audio-feature:
+    mime-type: audio/wav
+    tokens:
+    - value-url: http://localhost/xyz1234.wav
+  my-text-token-feature:
+    encoding: UTF-8
+    lang: en
+    mime-type: text/plain
+    span:
+      end-offset: PT0.1045
+      start-time: PT0.0210
+    token-schema: ''
+    tokens:
+    - value: what
+    - value: is
+    - value: the
+    - value: weather
+    - value: forecast
+    - value: for
+    - value: tomorrow
+id: user-utterance-30
+previous-id: user-utterance-28
+span:
+  end-offset: PT0.1045
+  start-time: '2022-12-20 15:59:01.246500+00:00'
+speaker-id: b5y09lky5KU5

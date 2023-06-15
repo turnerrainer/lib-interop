@@ -1,0 +1,29 @@
+agent: cassandra
+conversation: emmett_Wed,_14_Jun_2023_02:05:51_GMT
+features:
+  ej-custom-render:
+    mime-type: application/ejcustom+json
+    tokens:
+    - value:
+        emotion: ejNeutral
+        gesture: ''
+        semantic: Confirm Prescription [2]
+        voice: candandra
+  redacted-text:
+    encoding: UTF-8
+    lang: en
+    mime-type: plain/text
+    tokens:
+    - value: We have a regular prescription for $MEDICATION on file
+  text:
+    encoding: UTF-8
+    lang: en
+    mime-type: plain/text
+    tokens:
+    - value: We have a regular prescription for Citalopram 20 mg on file
+id: '2'
+mode: output/voice
+originPointType: ''
+span:
+  start-time: '2023-06-14 02:06:12+00:00'
+speaker-id: cassandra

@@ -21,7 +21,7 @@
         ]
     },
     "history":{
-        "#history of dialog events here#":""
+        ["#history of dialog events here#":""]
     },
     "context": {
         "#arbitrary items here or do we define some?#":""

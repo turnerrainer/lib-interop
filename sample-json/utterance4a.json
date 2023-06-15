@@ -3,7 +3,7 @@
     "id": "user-utterance-30",
     "previous-id": "user-utterance-28",
     "span": {
-        "start": "2022-12-20 15:59:01.246500+00:00",
+        "start-time": "2022-12-20 15:59:01.246500+00:00",
         "end-offset": "PT0.1045"
     },
     "features": {

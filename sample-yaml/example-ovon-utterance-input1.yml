@@ -1,0 +1,18 @@
+conversation: emmett_Wed,_14_Jun_2023_02:05:51_GMT
+ej-agent: cassandra
+ej-mode: input/voice
+ej-originPointType: chromium based edge
+features:
+  text:
+    ej-asrType: webkitSpeechRecognition
+    encoding: UTF-8
+    lang: en
+    mime-type: text/plain
+    tokens:
+    - confidence: 0.702
+      value: I need my repeat medication
+id: '1'
+span:
+  end-offset: PT0.2493
+  start-time: '2023-06-14 02:06:07+00:00'
+speaker-id: emmett

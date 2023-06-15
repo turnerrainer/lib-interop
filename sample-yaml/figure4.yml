@@ -1,0 +1,13 @@
+features:
+  my-text-feature:
+    alternates:
+    - - confidence: 0.73
+        value: what is the weather forecast for thursday
+    mime-type: text/plain
+    tokens:
+    - confidence: 0.96
+      value: what is the weather forecast for tomorrow
+id: user-utterance-30
+span:
+  start-time: '2022-12-20 15:59:01.246500+00:00'
+speaker-id: b5y09lky5KU5
