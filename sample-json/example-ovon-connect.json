@@ -1,0 +1,49 @@
+{
+    "ovn-version": "1.0",
+    "function": "handoff",
+
+    "general": {
+        "from-uri": "uri",
+        "to-uri": "uri",
+        "time-stamp": "2023-06-14 02:06:07+00:00",
+
+        "DELETE-originPointType": "chromium based edge",
+        "DELETE-language": "en-us"
+    },
+        
+    "handoff": {
+            "type": "delegate|request",
+            "mode": "sync|async"
+    },
+
+    "context": {
+        "conversationID": "some-unique-convo-ID",
+        "speakers": [
+            {
+                "speaker-id": "b5y09lky5KU5",
+                "accessToken": "asdfadsf",
+                "role": "user"
+            },
+            {
+                "agent-id": "weatherman.com",
+                "speaker-id": "mh8k907jjj",
+                "accessToken": "sdlfkjalkhjasd",
+                "role": "system"
+            }
+        ],
+        "agent-history": [
+            "azeba.amazon.com",
+            "voice-task-finder.com"
+        ],
+        "utterance-history": [
+            {"#":"Utterance history events in here, or maybe a history server reference"}
+        ],
+        "custom-context": {
+            "#arbitrary items here or do we define some?#":""
+        }
+    },
+
+    "event": {
+       "# Standard dialog event with an utterance expressing the task to be performed": "set an appointment for 4pm on friday"
+    }
+}

@@ -1,16 +1,28 @@
 features:
+  user-request-audio:
+    mime-type: audio/wav
+    tokens:
+    - value-url: http://localhost:8080/ab78h50ef.wav
   user-request-text:
     encoding: utf-8
     lang: en
     mime-type: text/plain
     tokens:
     - confidence: 0.99
+      links:
+      - $.user-request-audio.tokens[0].value-url
+      span:
+        end-offset: PT8.845
+        start-offset: PT8.79
       value: what is the weather forecast for tomorrow?
     - confidence: 0.87
+      span:
+        end-offset: PT8.845
+        start-offset: PT8.79
       value: what is the weather forecast for tuesday?
 id: user-utterance-45
 previous-id: user-utterance-44
 span:
-  end-offset: PT0.1045
-  start-time: '2022-12-20 15:59:01.246500+00:00'
+  end-offset: PT1.045
+  start-time: '2023-06-22T23:20:44.250759'
 speaker-id: user1234

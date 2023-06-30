@@ -1,0 +1,83 @@
+{
+    "ovn-version": "1.0",
+    "function": "utterance",
+
+    "general": {
+        "from-uri": "uri",
+        "to-uri": "uri",
+        "time-stamp": "2023-06-14 02:06:07+00:00",
+
+        "DELETE-originPointType": "chromium based edge",
+        "DELETE-language": "en-us"
+    },
+
+    "context": {
+        "conversationID": "some-unique-convo-ID",
+        "speakers": [
+            {
+                "speaker-id": "b5y09lky5KU5",
+                "accessToken": "asdfadsf",
+                "role": "user"
+            },
+            {
+                "agent-id": "pharmacy1.com",
+                "speaker-id": "mh8k907jjj",
+                "accessToken": "sdlfkjalkhjasd",
+                "role": "system"
+            }
+        ],
+        "agent-history": [
+            "azeba.amazon.com",
+            "voice-task-finder.com"
+        ],
+        "utterance-history": [
+            {"#":"Utterance history events in here, or maybe a history server reference"}
+        ],
+        "custom-context": {
+            "#arbitrary items here or do we define some?#":""
+        }
+    },
+
+    "event": {
+       "speaker-id": "mh8k907jjj",
+ 
+        "ej-id": "1",
+        "ej-agent": "pharmacy1.com",
+        "ej-mode": "output/voice",
+        "ej-originPointType": "",
+        "ej-asrType": "webkitSpeechRecognition",
+    
+        "span": {
+          "start-time": "2023-06-14 02:06:12+00:00"
+        },
+      
+        "features": {
+            "text": {
+                "mime-type": "plain/text",
+                "lang": "en",
+                "encoding": "UTF-8",
+                "tokens": [ { "value": "We have a regular prescription for Citalopram 20 mg on file"  } ]
+            },
+    
+            "redacted-text": {
+                "mime-type": "plain/text",
+                "lang": "en",
+                "encoding": "UTF-8",
+                "tokens": [ { "value": "We have a regular prescription for $MEDICATION on file"  } ]
+            },
+    
+            "ej-custom-render": {
+                "mime-type": "application/ejcustom+json",
+                "tokens": [ {
+                    "value": {
+                        "semantic":"Confirm Prescription [2]",
+                        "emotion": "ejNeutral",
+                        "voice": "candandra",
+                        "gesture": "" 
+                    } 
+                }
+                ]
+            }
+        }
+    }
+}

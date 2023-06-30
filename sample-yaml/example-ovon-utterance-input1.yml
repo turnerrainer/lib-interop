@@ -1,3 +1,5 @@
+NOTE: This object is currently informative not normative.  A derived specification
+  of the dialog event object will be published to standardize this at a later date.
 conversation: emmett_Wed,_14_Jun_2023_02:05:51_GMT
 ej-agent: cassandra
 ej-mode: input/voice
