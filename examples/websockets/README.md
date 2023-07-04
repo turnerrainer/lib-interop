@@ -1,6 +1,7 @@
 # Demonstration of using websockets to do server-side speech recognition and TTS
 The client is a web browser and the server is a websocket server
-This could be used for the channeling pattern, since it doesn't require the secondary assistant to be able to do ASR or TTS.
+The ASR and TTS are done on the primary assistant.
+This could be used for the channeling pattern.
 
 ## Server-side code (Python):
 1. webSocketServer.py (primary assistant)

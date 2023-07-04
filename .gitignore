@@ -16,3 +16,6 @@ schemas/desktop.ini
 utils/desktop.ini
 utils/__pycache__/desktop.ini
 utils/__pycache__/dialog_event.cpython-38.pyc
+examples/websockets/webSocketServerBak.py
+examples/websockets/webSocketServerBak1.py
+examples/websockets/webSocketServerBak2.py
