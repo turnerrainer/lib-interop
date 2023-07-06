@@ -71,8 +71,11 @@ async def process_complete_audio(audio_data):
     
 	
 def transcribe_file(name):
+    print("loading model")
     model = whisper.load_model("base.en")
+    print("loaded model")
     result = model.transcribe(name)
+    print("transcribed file")
     transcription = result["text"]
     return(transcription)
     #print(result["text"])
