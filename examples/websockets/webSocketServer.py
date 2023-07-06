@@ -38,9 +38,11 @@ async def audio_server(websocket, path):
 				
                 '''
                 await websocket.send(transcription)
+                print("transcription received by client")
                 # Send another audio file back to the client
                 with open('testFile.wav', 'rb') as audio_file:
                     await websocket.send(audio_file.read())
+                   
                     
     except websockets.exceptions.ConnectionClosed:
         print("WebSocket connection closed")
@@ -71,6 +73,8 @@ async def process_complete_audio(audio_data):
     
 	
 def transcribe_file(name):
+    print("transcribing file")
+    print(name)
     print("loading model")
     model = whisper.load_model("base.en")
     print("loaded model")
