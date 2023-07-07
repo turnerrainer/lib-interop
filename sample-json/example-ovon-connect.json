@@ -1,6 +1,6 @@
 {
     "ovn-version": "1.0",
-    "function": "handoff",
+    "function": "can_you_do_this",
 
     "general": {
         "from-uri": "uri",
