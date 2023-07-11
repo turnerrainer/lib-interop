@@ -1,6 +1,8 @@
 import asyncio
 import websockets
 import whisper
+import assistant
+from gtts import gTTS
 
 transcription = "initial transcription"
 
@@ -18,7 +20,6 @@ async def audio_server(websocket, path):
                
             if audio_data:
                 # Process the audio stream as needed
-                #process_audio_stream(audio_data)
                 print("Received audio stream length:", len(audio_data))
                 with open('received_audio.wav', 'wb') as audio_file:
                    audio_file.write(audio_data)
@@ -27,51 +28,25 @@ async def audio_server(websocket, path):
                    transcription = result
                    print(transcription)
                    print(result)
-                '''
-                # Check if the complete audio data should be processed
-                if should_process_complete_audio(audio_data):
-                    # Process the complete audio data
-                    process_complete_audio(audio_data)
-                    print("processed audio")
-                    # Send a response to the client
-                    await websocket.send(transcription)
-				
-                '''
+                   what_to_say = assistant.assistant(transcription)
+                   print(what_to_say)
+              
                 await websocket.send(transcription)
                 print("transcription received by client")
-                # Send another audio file back to the client
-                with open('testFile.wav', 'rb') as audio_file:
+                # Send assistant response audio back to the client
+                output_audio = gTTS(what_to_say)
+                output_audio.save("output_audio_file.wav")
+                with open("output_audio_file.wav", 'rb') as audio_file:
                     await websocket.send(audio_file.read())
-                   
-                    
+                await websocket.send(what_to_say)
+                                 
     except websockets.exceptions.ConnectionClosed:
         print("WebSocket connection closed")
     except Exception as e:
         print("Error:", e)
 
-def process_audio_stream(audio_data):
-    # Process the received audio stream as needed
-    # Here, we simply print the length of the received audio data
-    print("Received audio stream length:", len(audio_data))
-    process_complete_audio(audio_data)
 
-def should_process_complete_audio(audio_data):
-    # Determine if the complete audio data should be processed
-    # Here, we assume that a specific condition triggers the processing
-    return audio_data.endswith(b'complete')
-
-async def process_complete_audio(audio_data):
-    # Process the complete audio data as needed
-    # Here, we save it to an audio file named 'audio_file_received.wav'
-    with open('received_audio.wav', 'wb') as audio_file:
-        audio_file.write(audio_data)
-    print("Audio file saved successfully")
-    result = transcribe_file("received_audio.wav")
-    transcription = result
-    print(transcription)
-    print(result)
     
-	
 def transcribe_file(name):
     print("transcribing file")
     print(name)

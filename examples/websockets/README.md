@@ -28,7 +28,7 @@ This could be used for the channeling pattern.
 1. updates the textarea with the transcription
 
 ## todo:
-1. receive and play TTS audio from the server (possible TTS could be TesnorFlowTTS, version fastspeech2, just the inference code is necessary since we aren't training the TTS)
+1. receive and play TTS audio from the server (possible TTS could be TensorFlowTTS, model fastspeech2, just the inference code is necessary since we aren't training the TTS)
 2. write a rudimentary discovery placeholder
 3. write a rudimentary secondary assistant that accepts OVON messages from the server
 4. connect to the secondary assistant from the server
