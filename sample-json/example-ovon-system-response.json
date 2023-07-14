@@ -73,7 +73,7 @@
 
             "audio": {
                 "value-uri" : "http://my_favorite_tts.com/generate.jsp?text='say something'?parameters='voice:polly2'aaa:bbb:cc<sfdsfdsf>'"
-            }
+            },
 
             "ej-custom-render": {
                 "mime-type": "application/ejcustom+json",
