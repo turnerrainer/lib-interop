@@ -32,21 +32,17 @@ socket.onerror = error => {
   console.error('WebSocket error:', error);
 };
 
-// Handle WebSocket message event
-
-/*socket.onmessage = event => {
-   console.log(event.data)
-   appendText(event.data)
-}
-*/
-
+// the message can contain either a dialog event, the text transcription or an audio Blob
 socket.onmessage = function(event) {
   if (typeof event.data === 'string') {
     // Handle text data
     var receivedText = event.data;
     console.log("Received text:", receivedText);
-	console.log(event.data)
-    appendText(event.data);
+	console.log(event.data);
+    messageType = decideMessageType(event.data);
+    processedMessage = processMessage(messageType,event.data);
+    messageWindow = getWindow(messageType);
+    appendText(messageWindow,processedMessage);
     
     // Use the received text as needed
   } else if (event.data instanceof Blob) {
@@ -64,13 +60,14 @@ socket.onmessage = function(event) {
     console.log("Received data of unknown type");
   }
 };
- 
-
 // Handle WebSocket connection close event
 socket.onclose = () => {
   console.log('WebSocket connection closed');
-};
 }
+
+}
+
+
 
 function stopRecording(){
 	console.log("finished recording");
@@ -82,5 +79,28 @@ function closeSocket(){
     socket.close();
 }
 
+function processMessage(messageType,message){
+    var formattedJSON = message;
+    if(messageType == "dialogEvent"){
+        messageToFormat = message.replace("dialog event: ","");
+        messageToFormat = messageToFormat.replace(/'/g, '"');
+        var parseJSON = JSON.parse(messageToFormat);
+        var formattedJSON = JSON.stringify(parseJSON, undefined, 4);  
+    }
+    console.log(formattedJSON);
+    return formattedJSON;
+}
 
-
+//decide where to display the text result vs the dialog event
+function getWindow(messageType){
+    console.log("messageType is " + messageType);
+    displayWindowName = ""
+    if(messageType == "dialogEvent"){
+        displayWindowName = "toMessages";
+    }
+    else{
+        displayWindowName = "conversationBox";
+    }
+    console.log("displayWindow is " + displayWindowName);
+    return displayWindowName;
+}      

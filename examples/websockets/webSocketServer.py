@@ -1,10 +1,11 @@
 import asyncio
 import websockets
 import whisper
-import assistant
+from assistant import *
 from gtts import gTTS
 
 transcription = "initial transcription"
+assistant = Assistant()
 
 async def audio_server(websocket, path):
     try:
@@ -28,25 +29,33 @@ async def audio_server(websocket, path):
                    transcription = result
                    print(transcription)
                    print(result)
-                   what_to_say = assistant.assistant(transcription)
+                   what_to_say = assistant.invoke_assistant(transcription)
                    print(what_to_say)
               
                 await websocket.send(transcription)
                 print("transcription received by client")
+				
                 # Send assistant response audio back to the client
                 output_audio = gTTS(what_to_say)
                 output_audio.save("output_audio_file.wav")
                 with open("output_audio_file.wav", 'rb') as audio_file:
                     await websocket.send(audio_file.read())
+				# send text result back to client
                 await websocket.send(what_to_say)
+                message_to_client = assistant.get_input_message()
+                print(message_to_client)
+                string_message = str(message_to_client)
+                to_send = "dialog event: " + string_message
+				# send input message back to client for user to look at
+                await websocket.send(to_send)
                                  
     except websockets.exceptions.ConnectionClosed:
         print("WebSocket connection closed")
     except Exception as e:
         print("Error:", e)
 
-
     
+# call speech recognizer (in this case Whisper) to transcribe file 
 def transcribe_file(name):
     print("transcribing file")
     print(name)
@@ -57,8 +66,7 @@ def transcribe_file(name):
     print("transcribed file")
     transcription = result["text"]
     return(transcription)
-    #print(result["text"])
-
+  
 
 # Create a WebSocket server
 start_server = websockets.serve(audio_server, 'localhost', 8765)
