@@ -34,3 +34,4 @@ utils/.ipynb_checkpoints/dialog_event-checkpoint.py
 examples/websockets/output_audio_file.wav
 package-lock.json
 python/lib/__pycache__/dialog_event.cpython-38.pyc
+javascript/example-notebook/node_modules

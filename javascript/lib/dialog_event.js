@@ -1,5 +1,5 @@
 const fs = require('fs');
-const yaml = require('js-yaml');
+// const yaml = require('js-yaml');
 
 class DialogPacket {
     constructor() {
@@ -15,12 +15,12 @@ class DialogPacket {
         return JSON.stringify(this.packet)
     }
 
-    load_yml(s) {
-        this.packet=yaml.load(s);
-    }
-    dump_yml() {
-        return yaml.safeDump(data);
-    }
+    // load_yml(s) {
+    //    this.packet=yaml.load(s);
+    // }
+    // dump_yml() {
+    //     return yaml.safeDump(data);
+    //}
 }
 
 this.DialogPacket=DialogPacket
