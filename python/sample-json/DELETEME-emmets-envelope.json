@@ -1,0 +1,61 @@
+{
+    "OVON": {
+        "version": "0.0.1",
+        "directive": "user-response",
+        "general": {
+            "function": "connect-delegate",
+            "from": "uri",
+            "to": "uri",
+            "humanID": "emmett",
+            "originPointType": "chromium based edge",
+            "conversationID": "some-unique-convo-ID",
+            "time-stamp": "some-unix-time",
+            "language": "en-us"
+        },
+        "connect": {
+            "type": "delegate|request",
+            "mode": "sync|async"
+        },
+        "output": {
+            "mode": "TTS|audio|display",
+            "assistantID": "Cassandra27477471",
+            "tts": {
+                "text": "What the assistant wants to say (and log, possibly redacted).",
+                "unredacted-text": "What to say including things redacted from log.",
+                "mime/type": "TTS|audio|display",
+                "voiceID": "cassandra"
+            },
+            "audio": {
+                "file-url": "url-of-sudiofile",
+                "mime/type": "wav"
+            }
+        },
+        "input": {
+            "assistantID": "Cassandra27477471",
+            "times": {
+                "startTime": "1687283096323",
+                "durationMS": "3190",
+                "startTimeUTC": "Tue, 20 Jun 2023 17:44:59 GMT"
+            },
+            "result": {
+                "format": {
+                    "mimetype": "text/plain",
+                    "language": "en",
+                    "encoding": "UTF-8",
+                    "mode": "webkitSpeechRecognition"
+                },
+                "finalComplete": {
+                    "text": "Hello how are you doing today",
+                    "confidence": "0.010"
+                }
+            }
+        },
+        "report": {
+            "response-to": "delegation",
+            "success": "true",
+            "mimetype": "text/plain",
+            "encoding": "UTF-8",
+            "report-text": "Some text report e.g BAD_JSON"
+        }
+    }
+}

@@ -1,0 +1,71 @@
+{
+    "ovn-version": "1.0",
+    "function": "utterance",
+
+    "general": {
+        "from-uri": "uri",
+        "to-uri": "uri",
+        "time-stamp": "2023-06-14 02:06:07+00:00",
+
+        "DELETE-originPointType": "chromium based edge",
+        "DELETE-language": "en-us"
+    },
+
+    "context": {
+        "conversationID": "some-unique-convo-ID",
+        "speakers": [
+            {
+                "speaker-id": "b5y09lky5KU5",
+                "accessToken": "asdfadsf",
+                "role": "user"
+            },
+            {
+                "agent-id": "pharmacy1.com",
+                "speaker-id": "mh8k907jjj",
+                "accessToken": "sdlfkjalkhjasd",
+                "role": "system"
+            }
+        ],
+        "agent-history": [
+            "azeba.amazon.com",
+            "voice-task-finder.com"
+        ],
+        "utterance-history": [
+            {"#":"Utterance history events in here, or maybe a history server reference"}
+        ],
+        "custom-context": {
+            "#arbitrary items here or do we define some?#":""
+        }
+    },
+
+    "event": {
+        "speaker-id": "b5y09lky5KU5",
+        
+        "ej-id": "1",
+        "ej-agent": "pharmacy1.com",
+        "ej-mode": "input/voice",
+        "ej-originPointType": "chromium based edge",
+        "ej-asrType": "webkitSpeechRecognition",
+
+        "span": {
+          "start-time": "2023-06-14 02:06:07+00:00",
+          "end-offset": "PT0.2493"
+        },
+      
+        "features": {
+            "text": {
+                "mime-type": "text/plain",
+                "lang": "en",
+                "encoding": "UTF-8",
+                "tokens": [
+                  {
+                    "value": "I need my repeat medication",
+                    "confidence": 0.702
+                  }  
+                ]
+            }
+        }
+    },
+
+    "response": {}
+}
