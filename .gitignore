@@ -35,3 +35,4 @@ utils/__pycache__/dialog_event.cpython-39.pyc
 utils/.ipynb_checkpoints/dialog_event-checkpoint.py
 examples/websockets/output_audio_file.wav
 *.ipynb
+package-lock.json
