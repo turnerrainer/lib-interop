@@ -27,12 +27,9 @@ examples/websockets/scripts/bidirectional.txt
 examples/websockets/scripts/closeSocket.js
 examples/websockets/scripts/readTTS.txt
 examples/websockets/scripts/updateTextBox.txt
-
-example-notebooks/dialog-packet.ipynb
 examples/websockets/__pycache__/assistant.cpython-39.pyc
 examples/websockets/output_audio_file
 utils/__pycache__/dialog_event.cpython-39.pyc
 utils/.ipynb_checkpoints/dialog_event-checkpoint.py
 examples/websockets/output_audio_file.wav
-*.ipynb
 package-lock.json
