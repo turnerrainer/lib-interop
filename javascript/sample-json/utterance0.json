@@ -1,0 +1,37 @@
+{
+    "id": "user-utterance-45",
+    "speaker_id": "user1234",
+    "previous_id": "user-utterance-44",
+    "features": {
+        "user-request-text": {
+            "lang": "en",
+            "encoding": "utf-8",
+            "mime_type": "text/plain",
+            "tokens": [
+                {
+                    "value": "what is the weather forecast for tomorrow?",
+                    "confidence": 0.99,
+                    "span": {
+                        "end_offset": "PT8.845000",
+                        "start_offset": "PT8.790000"
+                    },
+                    "links": [
+                        "$.user-request-audio.tokens[0].value-url"
+                    ]
+                },
+                {
+                    "value": "what is the weather forecast for tuesday?",
+                    "confidence": 0.87,
+                    "span": {
+                        "end_offset": "PT8.845000",
+                        "start_offset": "PT8.790000"
+                    }
+                }
+            ]
+        }
+    },
+    "span": {
+        "start_time": "2023-06-22T23:20:44.250759",
+        "end_offset": "PT1.045000"
+    }
+}
