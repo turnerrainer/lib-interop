@@ -1,6 +1,6 @@
 {
     "ovon": {
-       "ovn-version": "1.0"
+       "version": "1.0"
     },
 
     "context": {
@@ -8,22 +8,20 @@
     },
 
     "assistant-delegate": {
-        "target-assistant": "www.pharmacy.com"
+        "to-url": "www.pharmacy.com"
     },
 
     "ui-utterance-respond": {
-        "event": {
-            "speaker-id": "mh8k907jjj",
+        "speaker-id": "mh8k907jjj",
 
-            "span": {
-                "start-time": "2023-06-14 02:06:07+00:00"
-            },
-        
-            "features": {
-                "text": {
-                    "mime-type": "text/plain",
-                    "tokens": [ { "value": "I'll pass you over to bond."  } ]
-                }
+        "span": {
+            "start-time": "2023-06-14 02:06:07+00:00"
+        },
+    
+        "features": {
+            "text": {
+                "mime-type": "text/plain",
+                "tokens": [ { "value": "I'll pass you over to bond."  } ]
             }
         }
     }

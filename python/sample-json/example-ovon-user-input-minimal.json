@@ -8,22 +8,20 @@
     },
 
     "ui-utterance-send": {
-        "event": {
-            "speaker-id": "b5y09lky5KU5",
+        "speaker-id": "b5y09lky5KU5",
 
-            "span": {
-                "start-time": "2023-06-14 02:06:07+00:00"
-            },
-        
-            "features": {
-                "text": {
-                    "mime-type": "text/plain",
-                    "tokens": [
-                    {
-                        "value": "I need my repeat medication"
-                    }  
-                    ]
-                }
+        "span": {
+            "start-time": "2023-06-14 02:06:07+00:00"
+        },
+    
+        "features": {
+            "text": {
+                "mime-type": "text/plain",
+                "tokens": [
+                {
+                    "value": "I need my repeat medication"
+                }  
+                ]
             }
         }
     }
