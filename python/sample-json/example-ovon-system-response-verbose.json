@@ -1,14 +1,7 @@
 {
-    "ovn-version": "1.0",
-    "function": "utterance",
-
-    "general": {
-        "from-uri": "uri",
-        "to-uri": "uri",
-        "time-stamp": "2023-06-14 02:06:07+00:00",
-
-        "DELETE-originPointType": "chromium based edge",
-        "DELETE-language": "en-us"
+    "ovon": {
+        "version": "1.0",
+        "time-stamp": "2023-06-14 02:06:07+00:00"
     },
 
     "context": {
@@ -38,20 +31,20 @@
         }
     },
 
-    "event": {
+    "ui-utterance-respond": {
        "speaker-id": "mh8k907jjj",
- 
-        "ej-id": "1",
-        "ej-agent": "pharmacy1.com",
-        "ej-mode": "output/voice",
-        "ej-originPointType": "",
-        "ej-asrType": "webkitSpeechRecognition",
-    
+   
         "span": {
           "start-time": "2023-06-14 02:06:12+00:00"
         },
       
         "features": {
+
+            "audio": {
+                "mime-type": "audio/mpeg",
+                "value-uri" : "https://texttospeech.googleapis.com/v1beta1/text:synthesize?Authorization: Bearer ACCESS_TOKEN { \"input\": {\"text\": \"<speak> <s>We have a regular prescription for Citalopram 20 mg on file </s> </speak>\" }, \"voice\": { \"languageCode\": \"en-US\", \"name\": \"en-US-WaveNet-D\" }, \"audioConfig\": {\"audioEncoding\": \"MP3\"} }"
+            },
+
             "text": {
                 "mime-type": "plain/text",
                 "lang": "en",
@@ -67,26 +60,31 @@
             },
     
             "ssml-text": {
-
-
+                "mime-type": "ssml+xml",
+                "tokens": [ { "value": "<speak> <s>We have a regular prescription for Citalopram 20 mg on file </s> </speak>" } ]
+            },
+            
+            "custom-semantic":{
+                "mime-type": "custom/semantic",
+                "tokens": [ { "value": "Confirm Prescription [2]"} ]
+            },
+            
+            "custom-emotion": {
+                "mime-type": "custom/emotion",
+                "tokens": [ { "value":"ejNeutral"} ]
             },
 
-            "audio": {
-                "value-uri" : "http://my_favorite_tts.com/generate.jsp?text='say something'?parameters='voice:polly2'aaa:bbb:cc<sfdsfdsf>'"
-            },
+            "custom-gesture": {
+                "mime-type": "custom/gesture",
+                "tokens": [ { "value" : ""} ]
+            } 
 
-            "ej-custom-render": {
-                "mime-type": "application/ejcustom+json",
-                "tokens": [ {
-                    "value": {
-                        "semantic":"Confirm Prescription [2]",
-                        "emotion": "ejNeutral",
-                        "voice": "candandra",
-                        "gesture": "" 
-                    } 
-                }
-                ]
-            }
-        }
+        },
+
+        "custom-id": "1",
+        "custom-mode": "output/voice",
+        "custom-voice": "candandra",
+        "custom-originPointType": "",
+        "custom-asrType": "webkitSpeechRecognition"
     }
 }

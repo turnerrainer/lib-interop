@@ -1,14 +1,7 @@
 {
-    "ovn-version": "1.0",
-    "function": "utterance",
-
-    "general": {
-        "from-uri": "uri",
-        "to-uri": "uri",
-        "time-stamp": "2023-06-14 02:06:07+00:00",
-
-        "DELETE-originPointType": "chromium based edge",
-        "DELETE-language": "en-us"
+    "ovon": {
+        "version": "1.0",
+        "time-stamp": "2023-06-14 02:06:07+00:00"
     },
 
     "context": {
@@ -38,14 +31,8 @@
         }
     },
 
-    "event": {
+    "ui-utterance-send": {
         "speaker-id": "b5y09lky5KU5",
-        
-        "ej-id": "1",
-        "ej-agent": "pharmacy1.com",
-        "ej-mode": "input/voice",
-        "ej-originPointType": "chromium based edge",
-        "ej-asrType": "webkitSpeechRecognition",
 
         "span": {
           "start-time": "2023-06-14 02:06:07+00:00",
@@ -64,8 +51,11 @@
                   }  
                 ]
             }
-        }
-    },
+        },
 
-    "response": {}
+        "custom-id": "1",
+        "custom-mode": "input/voice",
+        "custom-originPointType": "chromium based edge",
+        "custom-asrType": "webkitSpeechRecognition"
+    }
 }
