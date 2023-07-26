@@ -1,0 +1,66 @@
+context:
+  agent-history:
+  - azeba.amazon.com
+  - voice-task-finder.com
+  conversationID: some-unique-convo-ID
+  custom-context:
+    '#arbitrary items here or do we define some?#': ''
+  speakers:
+  - accessToken: asdfadsf
+    role: user
+    speaker-id: b5y09lky5KU5
+  - accessToken: sdlfkjalkhjasd
+    agent-id: pharmacy1.com
+    role: system
+    speaker-id: mh8k907jjj
+  utterance-history:
+  - '#': Utterance history events in here, or maybe a history server reference
+ovon:
+  time-stamp: '2023-06-14 02:06:07+00:00'
+  version: '1.0'
+ui-utterance-respond:
+  custom-asrType: webkitSpeechRecognition
+  custom-id: '1'
+  custom-mode: output/voice
+  custom-originPointType: ''
+  custom-voice: candandra
+  features:
+    audio:
+      mime-type: audio/mpeg
+      value-uri: 'https://texttospeech.googleapis.com/v1beta1/text:synthesize?Authorization:
+        Bearer ACCESS_TOKEN { "input": {"text": "<speak> <s>We have a regular prescription
+        for Citalopram 20 mg on file </s> </speak>" }, "voice": { "languageCode":
+        "en-US", "name": "en-US-WaveNet-D" }, "audioConfig": {"audioEncoding": "MP3"}
+        }'
+    custom-emotion:
+      mime-type: custom/emotion
+      tokens:
+      - value: ejNeutral
+    custom-gesture:
+      mime-type: custom/gesture
+      tokens:
+      - value: ''
+    custom-semantic:
+      mime-type: custom/semantic
+      tokens:
+      - value: Confirm Prescription [2]
+    redacted-text:
+      encoding: UTF-8
+      lang: en
+      mime-type: plain/text
+      tokens:
+      - value: We have a regular prescription for $MEDICATION on file
+    ssml-text:
+      mime-type: ssml+xml
+      tokens:
+      - value: <speak> <s>We have a regular prescription for Citalopram 20 mg on file
+          </s> </speak>
+    text:
+      encoding: UTF-8
+      lang: en
+      mime-type: plain/text
+      tokens:
+      - value: We have a regular prescription for Citalopram 20 mg on file
+  span:
+    start-time: '2023-06-14 02:06:12+00:00'
+  speaker-id: mh8k907jjj

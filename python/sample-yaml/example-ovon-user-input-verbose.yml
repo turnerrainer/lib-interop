@@ -1,0 +1,37 @@
+context:
+  agent-history:
+  - azeba.amazon.com
+  - voice-task-finder.com
+  conversationID: some-unique-convo-ID
+  custom-context:
+    '#arbitrary items here or do we define some?#': ''
+  speakers:
+  - accessToken: asdfadsf
+    role: user
+    speaker-id: b5y09lky5KU5
+  - accessToken: sdlfkjalkhjasd
+    agent-id: pharmacy1.com
+    role: system
+    speaker-id: mh8k907jjj
+  utterance-history:
+  - '#': Utterance history events in here, or maybe a history server reference
+ovon:
+  time-stamp: '2023-06-14 02:06:07+00:00'
+  version: '1.0'
+ui-utterance-send:
+  custom-asrType: webkitSpeechRecognition
+  custom-id: '1'
+  custom-mode: input/voice
+  custom-originPointType: chromium based edge
+  features:
+    text:
+      encoding: UTF-8
+      lang: en
+      mime-type: text/plain
+      tokens:
+      - confidence: 0.702
+        value: I need my repeat medication
+  span:
+    end-offset: PT0.2493
+    start-time: '2023-06-14 02:06:07+00:00'
+  speaker-id: b5y09lky5KU5

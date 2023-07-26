@@ -1,0 +1,15 @@
+assistant-delegate:
+  to-url: www.pharmacy.com
+context:
+  conversationID: some-unique-convo-ID
+ovon:
+  version: '1.0'
+ui-utterance-respond:
+  features:
+    text:
+      mime-type: text/plain
+      tokens:
+      - value: I'll pass you over to bond.
+  span:
+    start-time: '2023-06-14 02:06:07+00:00'
+  speaker-id: mh8k907jjj
