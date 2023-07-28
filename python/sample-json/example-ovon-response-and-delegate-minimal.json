@@ -7,22 +7,27 @@
         "conversationID": "some-unique-convo-ID"
     },
 
-    "assistant-delegate": {
-        "to-url": "www.pharmacy.com"
-    },
-
-    "ui-utterance-respond": {
-        "speaker-id": "mh8k907jjj",
-
-        "span": {
-            "start-time": "2023-06-14 02:06:07+00:00"
+    "events": [
+        {
+            "event-type": "ovon-utterance-respond",
+            "parameters": {
+                "dialog-event": {
+                    "speaker-id": "mh8k907jjj",
+                    "span": { "start-time": "2023-06-14 02:06:07+00:00" },
+                    "features": {
+                        "text": {
+                            "mime-type": "text/plain",
+                            "tokens": [ { "value": "OK. I'll pass you over to pharmacy dot com."  } ]
+                        }
+                    }
+                }
+            }
         },
-    
-        "features": {
-            "text": {
-                "mime-type": "text/plain",
-                "tokens": [ { "value": "I'll pass you over to bond."  } ]
+        { 
+            "event-type": "assistant-delegate",
+            "parameters": {
+                "to-url": "www.pharmacy.com"
             }
         }
-    }
+    ]
 }

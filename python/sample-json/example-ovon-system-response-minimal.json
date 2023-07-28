@@ -6,18 +6,22 @@
     "context": {
         "conversationID": "some-unique-convo-ID"
     },
-
-    "ui-utterance-respond": {
-        "speaker-id": "b5y09lky5KU5",
-        "span": {
-            "start-time": "2023-06-14 02:06:07+00:00"
-        },
     
-        "features": {
-            "text": {
-                "mime-type": "text/plain",
-                "tokens": [ { "value": "I need my repeat medication" } ]
+    "events": [
+        {
+            "event-type": "ovon-utterance-respond",
+            "parameters": {
+                "dialog-event": {
+                    "speaker-id": "b5y09lky5KU5",
+                    "span": { "start-time": "2023-06-14 02:06:07+00:00" },               
+                    "features": {
+                        "text": {
+                            "mime-type": "text/plain",
+                            "tokens": [ { "value": "We have a regular prescription for Citalopram 20 mg on file." } ]
+                        }
+                    }
+                }
             }
         }
-    }
+    ]
 }
