@@ -31,60 +31,62 @@
         }
     },
 
-    "ui-utterance-respond": {
-       "speaker-id": "mh8k907jjj",
-   
-        "span": {
-          "start-time": "2023-06-14 02:06:12+00:00"
-        },
-      
-        "features": {
+    "events": [
+        {
+            "event-type": "utterance-respond",
+            "parameters": {
+                "dialog-event": {
+                    "speaker-id": "mh8k907jjj",
+                    "span": {"start-time": "2023-06-14 02:06:12+00:00"},
+                    
+                    "features": {
+                        "audio": {
+                            "mime-type": "audio/mpeg",
+                            "value-uri" : "https://texttospeech.googleapis.com/v1beta1/text:synthesize?Authorization: Bearer ACCESS_TOKEN { \"input\": {\"text\": \"<speak> <s>We have a regular prescription for Citalopram 20 mg on file </s> </speak>\" }, \"voice\": { \"languageCode\": \"en-US\", \"name\": \"en-US-WaveNet-D\" }, \"audioConfig\": {\"audioEncoding\": \"MP3\"} }"
+                        },
 
-            "audio": {
-                "mime-type": "audio/mpeg",
-                "value-uri" : "https://texttospeech.googleapis.com/v1beta1/text:synthesize?Authorization: Bearer ACCESS_TOKEN { \"input\": {\"text\": \"<speak> <s>We have a regular prescription for Citalopram 20 mg on file </s> </speak>\" }, \"voice\": { \"languageCode\": \"en-US\", \"name\": \"en-US-WaveNet-D\" }, \"audioConfig\": {\"audioEncoding\": \"MP3\"} }"
-            },
+                        "text": {
+                            "mime-type": "plain/text",
+                            "lang": "en",
+                            "encoding": "UTF-8",
+                            "tokens": [ { "value": "We have a regular prescription for Citalopram 20 mg on file"  } ]
+                        },
+                
+                        "redacted-text": {
+                            "mime-type": "plain/text",
+                            "lang": "en",
+                            "encoding": "UTF-8",
+                            "tokens": [ { "value": "We have a regular prescription for $MEDICATION on file"  } ]
+                        },
+                
+                        "ssml-text": {
+                            "mime-type": "ssml+xml",
+                            "tokens": [ { "value": "<speak> <s>We have a regular prescription for Citalopram 20 mg on file </s> </speak>" } ]
+                        },
+                        
+                        "custom-semantic":{
+                            "mime-type": "x-custom/semantic",
+                            "tokens": [ { "value": "Confirm Prescription [2]"} ]
+                        },
+                        
+                        "custom-emotion": {
+                            "mime-type": "x-custom/emotion",
+                            "tokens": [ { "value":"ejNeutral"} ]
+                        },
 
-            "text": {
-                "mime-type": "plain/text",
-                "lang": "en",
-                "encoding": "UTF-8",
-                "tokens": [ { "value": "We have a regular prescription for Citalopram 20 mg on file"  } ]
-            },
-    
-            "redacted-text": {
-                "mime-type": "plain/text",
-                "lang": "en",
-                "encoding": "UTF-8",
-                "tokens": [ { "value": "We have a regular prescription for $MEDICATION on file"  } ]
-            },
-    
-            "ssml-text": {
-                "mime-type": "ssml+xml",
-                "tokens": [ { "value": "<speak> <s>We have a regular prescription for Citalopram 20 mg on file </s> </speak>" } ]
-            },
-            
-            "custom-semantic":{
-                "mime-type": "custom/semantic",
-                "tokens": [ { "value": "Confirm Prescription [2]"} ]
-            },
-            
-            "custom-emotion": {
-                "mime-type": "custom/emotion",
-                "tokens": [ { "value":"ejNeutral"} ]
-            },
+                        "custom-gesture": {
+                            "mime-type": "x-custom/gesture",
+                            "tokens": [ { "value" : ""} ]
+                        } 
+                    },
 
-            "custom-gesture": {
-                "mime-type": "custom/gesture",
-                "tokens": [ { "value" : ""} ]
-            } 
-
-        },
-
-        "custom-id": "1",
-        "custom-mode": "output/voice",
-        "custom-voice": "candandra",
-        "custom-originPointType": "",
-        "custom-asrType": "webkitSpeechRecognition"
-    }
+                    "custom-id": "1",
+                    "custom-mode": "output/voice",
+                    "custom-voice": "candandra",
+                    "custom-originPointType": "",
+                    "custom-asrType": "webkitSpeechRecognition"
+                }
+            }
+        }
+    ]
 }
