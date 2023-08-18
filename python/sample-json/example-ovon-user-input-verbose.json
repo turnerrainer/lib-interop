@@ -31,31 +31,38 @@
         }
     },
 
-    "ui-utterance-send": {
-        "speaker-id": "b5y09lky5KU5",
+    "events": [
+        {
+            "event-type": "utterance-receive",
+            "parameters": {
+                "dialog-event": {
+                    "speaker-id": "b5y09lky5KU5",
 
-        "span": {
-          "start-time": "2023-06-14 02:06:07+00:00",
-          "end-offset": "PT0.2493"
-        },
-      
-        "features": {
-            "text": {
-                "mime-type": "text/plain",
-                "lang": "en",
-                "encoding": "UTF-8",
-                "tokens": [
-                  {
-                    "value": "I need my repeat medication",
-                    "confidence": 0.702
-                  }  
-                ]
+                    "span": {
+                    "start-time": "2023-06-14 02:06:07+00:00",
+                    "end-offset": "PT0.2493"
+                    },
+                
+                    "features": {
+                        "text": {
+                            "mime-type": "text/plain",
+                            "lang": "en",
+                            "encoding": "UTF-8",
+                            "tokens": [
+                            {
+                                "value": "I need my repeat medication",
+                                "confidence": 0.702
+                            }  
+                            ]
+                        }
+                    },
+
+                    "custom-id": "1",
+                    "custom-mode": "input/voice",
+                    "custom-originPointType": "chromium based edge",
+                    "custom-asrType": "webkitSpeechRecognition"
+                }
             }
-        },
-
-        "custom-id": "1",
-        "custom-mode": "input/voice",
-        "custom-originPointType": "chromium based edge",
-        "custom-asrType": "webkitSpeechRecognition"
-    }
+        }
+    ]
 }
