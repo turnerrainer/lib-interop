@@ -9,7 +9,7 @@
 
     "events": [
         {
-            "event-type": "ovon-utterance-respond",
+            "event-type": "utterance-respond",
             "parameters": {
                 "dialog-event": {
                     "speaker-id": "mh8k907jjj",
