@@ -9,7 +9,7 @@
 
     "events": [
         {
-            "event-type": "utterance-receive",
+            "event-type": "utterance",
             "parameters": {
                 "dialog-event": {
                     "speaker-id": "b5y09lky5KU5",
