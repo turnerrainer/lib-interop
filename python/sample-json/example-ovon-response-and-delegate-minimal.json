@@ -9,7 +9,7 @@
 
     "events": [
         {
-            "event-type": "utterance-respond",
+            "event-type": "utterance",
             "parameters": {
                 "dialog-event": {
                     "speaker-id": "mh8k907jjj",
@@ -26,7 +26,7 @@
         { 
             "event-type": "assistant-delegate",
             "parameters": {
-                "to-url": "www.pharmacy.com"
+                "to-url": "www.pharmacy.com:8080/voiceagent"
             }
         }
     ]

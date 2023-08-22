@@ -1,0 +1,21 @@
+{
+    "ovon": {
+       "version": "1.0"
+    },
+
+    "context": {
+        "conversationID": "some-unique-convo-ID"
+    },
+
+    "events": [
+        { 
+            "event-type": "assistant-engage",
+            "parameters": {
+                "dialog-event": {
+                    "speaker-id": "ab8k907jjj",
+                    "span": { "start-time": "2023-06-14 02:06:07+00:00" }
+                }               
+            }
+        }
+    ]
+}
