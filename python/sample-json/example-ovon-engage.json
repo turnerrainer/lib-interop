@@ -13,7 +13,8 @@
             "parameters": {
                 "dialog-event": {
                     "speaker-id": "ab8k907jjj",
-                    "span": { "start-time": "2023-06-14 02:06:07+00:00" }
+                    "span": { "start-time": "2023-06-14 02:06:07+00:00" },
+                    "features": {}
                 }               
             }
         }
