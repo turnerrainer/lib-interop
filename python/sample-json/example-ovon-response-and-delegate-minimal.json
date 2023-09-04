@@ -1,33 +1,39 @@
 {
-    "ovon": {
-       "version": "1.0"
-    },
-
-    "context": {
-        "conversationID": "some-unique-convo-ID"
-    },
-
-    "events": [
-        {
-            "event-type": "utterance",
-            "parameters": {
-                "dialog-event": {
-                    "speaker-id": "mh8k907jjj",
-                    "span": { "start-time": "2023-06-14 02:06:07+00:00" },
-                    "features": {
-                        "text": {
-                            "mime-type": "text/plain",
-                            "tokens": [ { "value": "OK. I'll pass you over to pharmacy dot com."  } ]
-                        }
-                    }
-                }
-            }
+	"ovon": {
+		"schema": {
+            "version": "1.1.0",
+		    "URI": "https://openvoicenetwork.org/schemas/pre-alpha-1.1.0"
         },
-        { 
-            "event-type": "assistant-delegate",
-            "parameters": {
-                "to-url": "www.pharmacy.com:8080/voiceagent"
-            }
-        }
-    ]
+        "conversation": {
+            "id": "31050879662407560061859425913208",
+            "reference": "00618594259132083105087966240756"
+        },
+
+		"events": [{
+				"event-type": "utterance",
+				"parameters": {
+					"dialog-event": {
+						"speaker-id": "mh8k907jjj",
+						"span": {
+							"start-time": "2023-06-14 02:06:07+00:00"
+						},
+						"features": {
+							"text": {
+								"mime-type": "text/plain",
+								"tokens": [{
+									"value": "OK. I'll pass you over to pharmacy dot com."
+								}]
+							}
+						}
+					}
+				}
+			},
+			{
+				"event-type": "assistant-delegate",
+				"parameters": {
+					"to-url": "www.pharmacy.com:8080/voiceagent"
+				}
+			}
+		]
+	}
 }
